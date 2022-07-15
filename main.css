@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root{
+    --bg-color: rgb(52, 51, 51);
+    --main-container-bg: rgb(29, 26, 26);
+    --timer-color: orange;
+    --change-length-bg: rgb(49, 47, 43);
+    --controller-button-bg: rgb(16, 14, 14);
+    --button-icon-color: orange;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--bg-color);
+    color: white;
+    user-select: none;
+    font-family: sans-serif;
+    font-family: "Inter", sans-serif;
+}
+
+.main__container{
+    padding: 1rem;
+    background-color: var(--main-container-bg);
+    border-radius: 10px;
+    border: 1px solid var(--timer-color);
+}
+
+.label{
+    text-transform: capitalize;
+    padding: .5rem;
+}
+
+.track{
+    fill: none;
+}
+
+.progress{
+    fill: none;
+    stroke: var(--timer-color);
+    stroke-width: 8px;
+    transform: rotate(-90deg);
+    transform-origin: center;
+    transition: all 1s;
+    border-radius: 10px;
+}
+
+.timer__container{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#timer{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+#time-left{
+    font-size: 3rem;
+}
+
+.timer__options{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 1.5rem;
+}
+
+
+#controllers{
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.controller__button{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--controller-button-bg);
+    width: 2.2em;
+    height: 2.2em;
+    font-size: 2rem;
+    border-radius: 50%;
+    border: 1px solid var(--timer-color);
+}
+
+.controller__button, .change__length{
+    color: var(--button-icon-color);
+}
+
+.controller__button:active, .change__length:active{
+    transform: scale(.98);
+}
+
+.controller__button:hover, .change__length:hover{
+    opacity: .7;
+}
+
+.length{
+    font-size: 1.5rem;
+}
+
+.change__length{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 1.5em;
+    height: 1.5em;
+    background-color: var(--change-length-bg);
+    border-radius: 50%;
+    margin: 0 .5rem;
+    border: 1px solid rgb(71, 71, 71);
+}
+
+.length__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    font-size: 1.3rem;
+}
+
+.timer__options__container{
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    display: flex;
+    margin: 2rem 0;
+}
