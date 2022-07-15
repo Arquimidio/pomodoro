@@ -12,6 +12,7 @@
     --timer-color: orange;
     --change-length-bg: rgb(49, 47, 43);
     --controller-button-bg: rgb(16, 14, 14);
+    --light-black: rgb(21, 20, 20);
     --button-icon-color: orange;
 }
 
@@ -40,7 +41,7 @@ body{
 }
 
 .empty__circle{
-    fill:none;
+    fill: var(--light-black);
     stroke: var(--bg-color);
     stroke-width: 8px;
     stroke-dasharray: 100%;
