@@ -39,8 +39,11 @@ body{
     padding: .5rem;
 }
 
-.track{
-    fill: none;
+.empty__circle{
+    fill:none;
+    stroke: var(--bg-color);
+    stroke-width: 8px;
+    stroke-dasharray: 100%;
 }
 
 .progress{
