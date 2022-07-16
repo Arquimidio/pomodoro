@@ -21,6 +21,7 @@ function App() {
   const [seconds, setSeconds] = useState(0);
   const [isSession, setIsSession] = useState(true);
   const [isTimeRunning, setIsTimeRunning] = useState(false);
+  const [receivedMessage, setReceivedMessage] = useState([]);
   const workerTimerRef = useRef(null);
   const padZero = value => value.toString().padStart(2, "0");
   const [fixedMin, fixedSec] = [padZero(minutes), padZero(seconds)];
@@ -30,19 +31,11 @@ function App() {
     const workerTimer = new window.Worker('./worker-timer.js');
     workerTimerRef.current = workerTimer;
     workerTimerRef.onerror = err => console.log(err);
-
-    return function cleanup(){
-      workerTimer.terminate();
-    }
-  }, [])
-
-  // Atualiza a função onMessage com os valores atualizados (evita closures com valores obsoletos de state)
-  useEffect(() =>{
-    workerTimerRef.current.onmessage = e => {
+    workerTimer.onmessage = e => {
       const { status } = e.data;
       switch(status){
         case "interval:running":
-          manageTimer();
+          setReceivedMessage([]);
           break;
         case "interval:ended":
           setIsTimeRunning(false);
@@ -51,8 +44,12 @@ function App() {
           console.log("Something went wrong with worker response")
       } 
     }
-  })
 
+
+    return function cleanup(){
+      workerTimer.terminate();
+    }
+  }, [])
 
   // Responde imediatamente à alteração do tempo de sessão se houver uma em andamento
   useEffect(() => {
@@ -63,8 +60,12 @@ function App() {
   }, [sessionLength])
 
   useEffect(() => {
-    document.title = `${isSession? "Session" : "Break"} - ${fixedMin} : ${fixedSec}`;
-  }, [minutes, seconds])
+    manageTimer();
+  }, [receivedMessage])
+
+  useEffect(() => {
+    document.title = `${fixedMin} : ${fixedSec}`;
+  }, [seconds])
 
   // Responde imediatamente à alteração do tempo de pausa se houver uma em andamento
   useEffect(() => {

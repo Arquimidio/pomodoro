@@ -1,6 +1,5 @@
 export default function Controllers({ toggleTimer, resetTimer, isTimeRunning, changeModality, isSession }){
     const modality = isSession? "person-running" : "bed";
-    console.log(modality)
     return(
         <div id="controllers">
             <div className="controller__button"  id="start_stop" onClick={toggleTimer}>
